@@ -218,18 +218,22 @@ input[type="radio"].visually-hidden {
 .product-info {
     display: flex;
     justify-content: space-between;
+    padding: 20px;
 }
 
 .product-image {
     margin: 0;
     padding: 0;
+
+    width: 500px;
 }
 
+
 .product-description-column {
+    flex-grow: 1;
+
     padding: 40px;
     padding-top: 0;
-
-    width: 100%;
 }
 
 .product-properties-controls {
@@ -283,4 +287,35 @@ input[type="radio"].visually-hidden {
 
 .product-properties-hidden {
     display: none;
+}
+
+.product-properties-list {
+    margin:0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.contacts {
+    display: flex;
+    flex-shrink: 0;
+    justify-content: space-between;
+    /* flex-wrap: wrap; */
+
+    padding: 0 40px;
+}
+
+.contacts-column {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    width: 500px;
+}
+
+.contacts-column p {
+    margin: 0;
+    margin-bottom: 20px;
+    padding: 0;
+    display: block;
+    width: 100%;
 }
