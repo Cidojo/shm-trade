@@ -1,0 +1,215 @@
+'use strict';
+
+
+
+
+
+
+define('icon-set-loader',['require'],function(a){
+
+return{
+
+
+
+
+
+
+loadIconSet:function(){return function(c,d){
+var e=this;
+d=d||function(){};
+
+
+
+var f=e.iconSetsDeps[c]||e.iconSetsDeps[e.defaultIconSet];
+a(f,d);
+}}(),
+
+loadIconSetPack:function(){return function(c){var d=this,e=1<arguments.length&&arguments[1]!==void 0?arguments[1]:function(){},
+f=[];
+
+c.map(function(g){
+f.push(d.iconSetsDeps[g]);
+}),
+
+a.apply(void 0,f.concat([function(){
+e();
+}]));
+}}(),
+
+
+loadAll:function(){return function(c){
+var d=this;
+Object.keys(d.iconSetsDeps).forEach(function(e){
+a(d.iconSetsDeps[e],function(){
+c(e);
+});
+});
+}}(),
+
+
+
+
+
+defaultIconSet:'fontAwesome',
+
+
+
+
+
+iconSetsDeps:{fontAwesome:['css!font-awesome-css'],octIcons:['css!octicons-css'],typIcons:['css!typicons-css'],icoMoon:['css!icomoon-css'],material:['css!material-design-icons-css'],glyphIcons:['css!glyphicons-css']}};
+
+
+
+
+
+
+
+
+
+
+});
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map
+
+//# sourceMappingURL=icon-set-loader.js.map

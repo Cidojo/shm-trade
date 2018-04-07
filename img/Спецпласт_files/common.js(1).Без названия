@@ -1,0 +1,685 @@
+'use strict';
+
+
+
+
+
+
+
+
+
+
+
+(function(){
+
+
+
+var b={},
+
+
+
+
+
+
+
+
+d=function(){return function(X){
+var Y=/^(mailto|skype|tel):/i;
+return Y.test(X);
+}}(),
+
+
+
+
+
+
+
+f=function(){return function(X){
+var Y=/^(http|https):\/\//i;
+return Y.test(X);
+}}(),
+
+
+
+
+
+
+
+g=function(){return function(X){
+var Y=/^\/uploads\//i;
+return Y.test(X);
+}}(),
+
+
+
+
+
+
+
+
+
+
+
+i=function(){return function(X,Y,Z){
+
+var $=function(){return function(ba,ca){
+
+var da=b[ca];
+
+
+
+
+return da||(da=document.querySelectorAll(ca),b[ca]=da),
+
+0<Array.prototype.filter.call(da,function(ea){return ea.isEqualNode(ba)}).length;
+}}();
+
+
+if(Z&&$(X,Z))
+return!1;
+
+
+var _=b[Y];
+
+
+
+
+return _||(_=document.querySelectorAll(Y),b[Y]=_),
+
+0<Array.prototype.filter.call(_,function(aa){return aa.isEqualNode(X)}).length;
+}}(),
+
+
+j=function(){function W(X,Y){
+if(0<Y){
+if(!X||!X.getAttribute)return!1;
+
+var Z=X.getAttribute('href');return(
+
+Z?
+X:
+
+W(X.parentNode,Y-1));
+
+}
+}return W}(),
+
+
+
+
+
+
+
+
+
+k=function(){return function(X,Y,Z,$){
+
+
+return $=$||!1,function(_){
+
+
+
+
+
+
+
+
+
+
+var aa=j(_.target,3);
+if(!aa||!aa.getAttribute)return!1;
+var ba=aa.getAttribute('href');
+
+
+if(ba){
+
+
+
+
+
+
+if(_.preventDefault(),!$&&f(ba))return!1;
+
+
+if(!$&&g(ba))return!1;
+
+if($&&d(ba))return!0;
+
+
+if($&&f(ba))
+window.location.assign(ba);else
+if(ba&&i(aa,X,Y)&&!d(ba))
+
+
+
+if(/^\/?#/.test(ba)){
+var ca=window.location.pathname.split('/'),
+da=ba.split('#').shift();ca=
+
+window.location.pathname.split('/')[3]?
+'/'+ca.pop():
+
+'/',
+
+
+da!=ca&&''!==da?
+window.location.assign(Z(ba)):
+
+window.location.hash=ba.replace(/^\/?/,'');
+
+}else
+
+
+window.location.assign(Z(ba))}
+
+
+};
+}}(),
+
+
+m=function(){return function(X,Y){
+return function(Z){
+var $=j(Z.target,3);
+
+if(!$||!$.getAttribute)
+return!1;
+
+
+var _=$.getAttribute('href');return!!
+
+_&&(
+
+
+
+!f(_)||g(_)||d(_)?!1:void(
+
+
+
+Z.preventDefault(),
+
+_&&i($,X,Y)&&
+window.open(_,'_blank')));
+
+};
+}}(),
+
+
+
+n=function(){return function(X,Y,Z){
+return function($){
+var _=j($.target,3);
+
+if(!_||!_.getAttribute)
+return!1;
+
+
+var aa=_.getAttribute('href');
+
+if(!(!aa||f(aa)||g(aa)||d(aa))&&(
+
+
+
+$.preventDefault(),
+
+i(_,X,Y)))
+
+if(/^\/?#/.test(aa)){
+var ba=window.location.pathname.split('/'),
+ca=aa.split('#').shift();ba=
+
+window.location.pathname.split('/')[3]?
+'/'+ba.pop():
+
+'/',
+
+
+ca==ba?
+
+
+window.location.hash=aa.replace(/^\/?/,''):window.location.replace(Z(aa));
+
+}else
+
+
+window.location.replace(Z(aa));
+
+
+
+};
+}}(),
+
+
+
+
+
+o=function(){return function(X){
+X.forEach(function(Y){
+document.addEventListener('click',Y),
+document.addEventListener('dblclick',Y);
+});
+}}(),
+
+q=function(){return function(X){
+var Y=document.createElement('a');
+
+return Y.href=X,Y;
+}}(),
+
+r='/preview/'+window.cache.site;
+
+
+
+if(0===window.parent.document.location.pathname.indexOf('/neowizard'));else
+
+if(0<window.document.location.pathname.indexOf('interactive_preview')){
+var
+s='.js-w-mainmenu, .ul-blog-post-back-to-list',
+t=n(
+s,
+null,
+function(W){
+var
+X=q(W),
+Y=X.hash,
+Z=X.pathname,
+$='/site_import/interactive_preview'+('/'===Z?'/index':Z)+window.document.location.search+Y;
+
+return $;
+}),
+
+
+
+u='.ul-blog-post-title-link, .ul-blog-post-read-more, .ul-blog-post-title-link, .ul-blog-post-imagewrap a',
+v=n(
+u,
+null,
+function(W){
+var
+X=q(W),
+Y=X.hash,
+Z=X.pathname,
+$=Z.split('/'),
+_='/site_import/interactive_preview/'+$[1]+'/postId/'+$[2]+window.document.location.search+Y;
+
+return _;
+}),
+
+
+w=n(
+'a',
+[s,u].join(','),
+function(W){
+var
+X='/site_import/interactive_preview',
+Y=q(W),
+Z=Y.hash,
+$=Y.pathname.replace(X,''),
+_=X+('/'===$?'/index':$)+window.document.location.search+Z;
+
+return _;
+}),
+
+
+x=m(
+'a',
+[s,u].join(','));
+
+
+o([t,v,w,x]);
+}else
+
+
+
+if(0===window.document.location.pathname.indexOf('/preview')){
+
+var y=window.self===window.top,
+
+
+z='.js-w-mainmenu, .ul-blog-post-back-to-list',
+A=k(
+z,
+null,
+function(W){return r+W},
+y),
+
+
+
+B='.ul-blog-post-read-more, .ul-blog-post-title-link, .ul-blog-post-imagewrap a',
+C=k(
+B,
+null,
+function(W){var X=W.split('/');return r+'/'+X[1]+'/postId/'+X[2]},
+y),
+
+
+
+D='.ul-bi-post-title a, .ul-bi-post-footer__readmore__link',
+E=k(
+D,
+null,
+function(W){var X=W.split('/');return r+'/'+X[0]+'/postId/'+X[1]},
+y),
+
+
+
+
+
+
+
+G=k(
+'a',
+[z,B,D,'a[href="/__ordersuccess"]'].join(', '),
+function(W){return r+W},
+y);
+
+
+o([A,C,E,G]);
+}else
+
+
+if(/^\/sites\/url\/[^\/]+\/backup\//.test(window.document.location.pathname)){
+
+var H=k(
+'.js-w-mainmenu','.ul-blog-post-back-to-list',
+function(W){
+
+W=W.substr(1),
+
+''==W&&(W='index');
+
+
+var X=window.location.pathname.split('/');
+X.pop(),
+X.push(W);
+
+var Y,
+Z;
+
+if(/^\/sites\/url\/[A-Za-z0-9_]+\/backup\/preview\/[A-Za-z0-9]+\/[a-z0-9_\-]+$/.test(window.location.pathname))
+
+
+Z=X[6],
+Y=X[7];else
+{
+
+
+var $=window.location.pathname.split('/');
+Y=$[8],
+Z=X[6];
+}
+return'/sites/url/'+window.cache.site+'/backup/preview/'+Z+'/'+Y;
+},!0),
+
+
+
+
+I=k(
+'.ul-blog-post-read-more','.ul-blog-post-title-link',
+function(W){
+var X=W.split('/'),
+
+Y=window.location.pathname.split('/'),
+Z=Y[6],
+$=Y[7];
+
+
+return'/sites/url/'+window.cache.site+'/backup/previewPost/'+Z+'/pageId/'+$+'/postId/'+X[2];
+},!0),
+
+
+
+
+J=k(
+'.js-widget-cart-button-checkout',
+null,
+function(W){
+var X=window.location.pathname.split('/'),
+Y=X[6];
+
+return'/sites/url/'+window.cache.site+'/backup/preview/'+Y+W;
+},!0);
+
+
+
+o([H,I,J]);
+}else
+if(0===window.document.location.pathname.indexOf('/')&&
+0!==window.document.location.pathname.indexOf('/preview'))
+{
+
+var K,
+L=function(){return function(){
+var X=document.createElement('a');
+
+
+return X.href='/',X.style.textDecoration='none',X;
+}}(),
+
+
+M=document.getElementsByTagName('header')[0],
+N=M.getElementsByClassName('ul-widget-icon')[0];
+if(N){
+var O=N.getElementsByTagName('img')[0];
+if(O)
+K=L(),
+N.appendChild(K),
+K.appendChild(O);else
+
+{
+var P=N.getElementsByTagName('span')[0];
+P&&(
+K=L(),
+N.appendChild(K),
+K.appendChild(P));
+
+}
+}
+
+
+var Q=M.getElementsByClassName('ul-widget-wysivig-header')[0];
+if(Q)
+
+if(Q.getElementsByTagName('h1').length){
+var R=Q.getElementsByTagName('h1')[0];
+R.getElementsByTagName('a').length||(
+K=L(),
+R.className+='g-color-text-1',
+R.parentElement.appendChild(K).appendChild(R));
+
+}else
+
+if(Q.getElementsByClassName('ul-w-header-span').length){
+var S=Q.getElementsByClassName('ul-w-header-span')[0];
+S.getElementsByTagName('a').length||(
+K=L(),
+S.className+=' g-color-text-1',
+S.parentElement.appendChild(K).appendChild(S));
+
+}
+
+}
+
+
+[document.getElementsByTagName('header'),document.getElementsByTagName('footer')].forEach(function(W){
+
+0<W.length&&(W[0].className=window.cache.headerFooterTheme);
+});
+
+
+
+var T=document.getElementById('freemiumBanners'),
+U=document.getElementById('freemiumBannersClose');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+if(T&&U&&U.addEventListener('click',function(){T.classList.toggle('freemium-banners--hidden')}),function(){return function(){var X=document.getElementById('freemiumBanner');X&&(window.onmessage=function(Y){var Z=Y.data;X.style.height=Z+'px'})}}()(),/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent)){
+var V=document.getElementById('body');
+V.setAttribute('data-isMobile',!0);
+}
+
+})();
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map
+
+//# sourceMappingURL=common.js.map

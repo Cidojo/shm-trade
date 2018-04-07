@@ -1,0 +1,226 @@
+'use strict';define('aDialog',['U','jquery','_','asyncjs','text!./html/aDialog/layout.html'],function(a,b,c,d,f){var g={$appendTo:b('#body-fict').length?b('#body-fict'):b('body'),curForm:null,defaults:{wide:!1,data:'<h2>Empty data!</h2>',context:null,required:null,templateData:null,templateUrl:null,templateCss:null,specialModeOverlay:!1,extendClass:'',noBorderRadius:!1,handler:!1,eventHandlerClass:'',afterOpen:function afterOpen(){},beforeClose:function beforeClose(){},dataChanged:function dataChanged(){}},open:function open(h){var i=this;i.opt=b.extend({},i.defaults,h),i.$aDialog=b(c.template(f,{handler:i.opt.handler,__:i.opt.__||function(){},eventHandlerClass:i.opt.eventHandlerClass,extendClass:i.opt.extendClass||''})).appendTo(i.$appendTo),i.opt.wide&&i.$aDialog.addClass('aDialog-wide'),i.opt.specialModeOverlay&&i.$aDialog.addClass('aDialog-special-overlay'),i.opt.noBorderRadius&&i.$aDialog.addClass('aDialog-no-border-radius'),setTimeout(function(){i.$aDialog.addClass('ul-js-aDialog-visible')},10),i.$body=i.$aDialog.find('#aDialog-data'),a.layers.on(0,function(){i.hide()}),b('body').addClass('js-aDialogOpened'),i._addEvents(),b('body').on('changePreviewDevise.aDialog',function(){i.hide()}),i._loadTemplate(),i.opened=!0},changeData:function changeData(h){if(this.opened)return this.$body.html(h),this.opt.dataChanged(),this.$body},hide:function hide(){var h=this,i=null;h.curForm&&(i=h.curForm.getResult(),h.curForm.destroy(),h.curForm=null),b('body').removeClass('js-aDialogOpened'),h.$aDialog&&h.$aDialog.off('.aDialog'),b('body').off('changePreviewDevise.aDialog'),h.opt.beforeClose(this.$body,i),h.$aDialog&&(h.$aDialog.remove(),h.$aDialog=null),h.$body=null,setTimeout(function(){h.opened=!1},500)},_hide:function _hide(){a.layers.off(!0)},_addEvents:function _addEvents(){var h=this;h.$aDialog.on('click.aDialog, touchend.aDialog',function(i){var j=b(i.target).closest('.ul-js-aDialog-visible');j.length&&j.hasClass('noClose')||(!b(i.target).closest('#aDialog-content').length||b(i.target).hasClass('js-aDialog-close'))&&a.layers.off(!0)})},msg:{show:function show(h){var i=this;this.hide(),h=b.extend({loading:!1,text:'',headerOverlap:!1,autoHide:0,clickClose:!1},h);var j=this._getStructure(h);h.headerOverlap&&j.css('top',g.$body.find('h2').outerHeight()||0),j=j.appendTo(g.$body),h.clickClose&&j.on('click.aDialog',function(k){i.hide(),k.stopPropagation()}),setTimeout(function(){j.addClass('aDialog-msg-visible')},10),h.autoHide&&(this.timer=setInterval(function(){i.hide()},h.autoHide))},_getStructure:function _getStructure(h){var i=b('<div class="aDialog-msg normal"></div>');return h.loading&&i.append('<span class="aDialog-msg-loading-icon"></span>'),i.append('<p class="aDialog-msg-text normal">'+h.text+'</p>'),i},hide:function hide(){this.timer&&clearInterval(this.timer);null===g.$body||g.$body.find('.aDialog-msg').off('.aDialog').remove()},changeText:function changeText(h){if(null!==g.$body){var i=g.$body.find('.aDialog-msg-text');i.length&&i.html(h)}}},_loadTemplate:function _loadTemplate(){var h=this,i=[];i.push(h.opt.required),i.push(h.opt.templateUrl),i.push(h.opt.templateCss),h.opt.templateUrl?require(i,function(j,k){h._renderFromData(c.template(k,h.opt.templateData)),j&&(h.curForm=b.extend({init:function init(){},getResult:function getResult(){},destroy:function destroy(){}},j),h.curForm.init(h.$body,h._hide,h.opt.context))}):h._renderFromData(h.opt.data)},_renderFromData:function _renderFromData(h){this.$body.html(h).removeClass('ul-loading-indicator'),this.opt.afterOpen(this.$body,this._hide)}};return g});
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map
+
+//# sourceMappingURL=aDialog.js.map

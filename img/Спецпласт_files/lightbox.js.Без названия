@@ -1,0 +1,46 @@
+"use strict";define("lightbox",["jquery","U","photoswipe","photoswipeUi","css!/css/require/lightbox.css","text!./html/lightBox.html","_","i18n"],function(t,i,e,o,n,l,r,u){var a={show:function(){return function(i){var e=this,o=!1;i=e.getOption(i),e.activeSlide=i.start||0,t("body").attr("data-lightbox",!0),e.isTouchSupport()||e._isMobile()?(o=!0,e.$tmpl=e.createLightBox(i,o),i=e.getImageWidthHeight(i)):(e.$tmpl&&e.$tmpl.length&&t(".js-lightbox-mobile").remove(),o=!1,e.createElem(i,o,function(){e.events()}))}}(),_isMobile:function(){return function(){var t=navigator.userAgent;if(!t)return!1;var i=/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(t);return i}}(),createLightBox:function(){return function(i,e){return t(r.template(l)({opt:i,touchSupport:e,i18n:u})).appendTo("body")}}(),getOption:function(){return function(i){return i=t.extend(!0,{title:"",src:"none",srcList:[],titleList:[],slide:!1,round:!1,start:0},i)}}(),loadLightBox:function(){return function(i,n){var l=this,r=new e(l.$tmpl[0],o,i,{history:!1,index:n.start,showAnimationDuration:100,hideAnimationDuration:100});r.init(),r.listen("close",function(){t(".js-lightbox-mobile").remove(),t("body").removeAttr("data-lightbox")})}}(),getImageWidthHeight:function(){return function(i){var e=this,o=i.srcList.length,n=0,l=[];t.each(i.srcList,function(){var t=this,r=new Image;r.src=this.src,r.onload=function(){l.push({src:r.src,h:r.height,w:r.width,title:t.title}),n++,n==o&&e.loadLightBox(l,i)}})}}(),showPreviewImage:function(){return function(i){var e=this,o=t('.ul-image[data-i="'+i+'"]',e.$tmpl),n=o.find("img");n.data("src")&&(n.attr("src",n.data("src")),n.removeData("src"),n.load(function(){t("#ul-lightbox-preview .ul-image").removeClass("ul-show-img"),o.addClass("ul-show-img"),e.controlPosition()}))}}(),events:function(){return function(){var e=this;i.layers.on(0,function(){a.hide()}),e.$templ.on("click.lightbox","#ul-w-lightbox-overlay-close",function(){t("#ul-lightbox-preview",e.tmpl).addClass("active"),i.layers.off(!0)}).on("click.lightbox",".ul-overlay-preview",function(){t("#ul-w-lightbox-overlay-close").trigger("click")}).on("click.lightbox",".ul-image img",function(){var i=t(this).closest(".ul-image"),o=parseInt(i.attr("data-i")),n=parseInt(i.attr("data-length"));return 0!==n&&(i.removeClass("ul-show-img"),o===n?o=0:o++,e.activeSlide=o,void e.showPreviewImage(o))}).on("click.lightbox",".ul-next",function(){t(".ul-image",e.$templ).eq(e.activeSlide).find("img").trigger("click")}).on("mouseenter.lightbox",".ul-image img",function(){t(".ul-next",t(this).closest(".ul-image")).css({cursor:"pointer",opacity:1})}).on("mouseleave.lightbox",".ul-image img",function(){t(".ul-next",t(this).closest(".ul-image")).css({cursor:"",opacity:""})}).on("mouseenter.lightbox",".ul-image .ul-overlay-preview",function(){t("#ul-w-lightbox-overlay-close",t(this).closest(".ul-image")).css({color:"#FFFFFF"})}).on("mouseleave.lightbox",".ul-image .ul-overlay-preview",function(){t("#ul-w-lightbox-overlay-close",t(this).closest(".ul-image")).css({color:""})}).on("click.lightbox",".ul-prev",function(){var i=t(this).closest(".ul-image"),o=parseInt(i.attr("data-i")),n=parseInt(i.attr("data-length"));return 0!==n&&(i.removeClass("ul-show-img"),0===o?o=n:o--,e.activeSlide=o,void e.showPreviewImage(o))}),t(document).on("keydown.lightbox",function(){}),t(document).on("keyup.lightbox",function(i){if(37==i.keyCode)t(".ul-image",e.$templ).eq(e.activeSlide).find(".ul-prev").trigger("click");else{if(39!=i.keyCode)return;t(".ul-image",e.$templ).eq(e.activeSlide).find("img").trigger("click")}}),t(window).on("resize.lightbox",function(){e.controlPosition()})}}(),isTouchSupport:function(){return function(){try{return document.createEvent("TouchEvent"),!0}catch(t){return!1}}}(),hide:function(){return function(){var i=this;i.$templ.off(".lightbox"),t(document).off(".lightbox"),t(window).off(".lightbox"),i.$templ.animate({opacity:0},170,function(){i.$templ.remove()}),i.$templ.off(".lightbox"),t("body").removeAttr("data-lightbox"),document.body.removeEventListener("touchstart",i.noScroll)}}(),createElem:function(){return function(i,e,o){var n=this;null!=n.$el&&n.$el.remove(),n.$templ=t(r.template(l)({opt:i,touchSupport:e,i18n:u})).appendTo("body"),n.showPreviewImage(n.activeSlide),o()}}(),controlPosition:function(){return function(){var i=this;t(".ul-image.ul-show-img .ul-prev",i.$tmpl).css({width:t(".ul-image.ul-show-img img",i.$tmpl).offset().left}),t(".ul-image.ul-show-img .ul-next",i.$tmpl).css({width:t(window).width()-(t(".ul-image.ul-show-img img",i.$tmpl).offset().left+t(".ul-image.ul-show-img img",i.$tmpl).width())}),t(".ul-image.ul-show-img .ul-lightbox-description-wrap",i.$tmpl).css({width:t(".ul-image.ul-show-img img",i.$tmpl)[0].getBoundingClientRect().width,left:t(".ul-image.ul-show-img img",i.$tmpl).position().left,top:t(".ul-image.ul-show-img img",i.$tmpl).position().top+t(".ul-image.ul-show-img img",i.$tmpl).height()})}}()};return a});
+//# sourceMappingURL=lightbox.js.map
+
+//# sourceMappingURL=lightbox.js.map
+
+//# sourceMappingURL=lightbox.js.map
+
+//# sourceMappingURL=lightbox.js.map
+
+//# sourceMappingURL=lightbox.js.map
+
+//# sourceMappingURL=lightbox.js.map
+
+//# sourceMappingURL=lightbox.js.map
+
+//# sourceMappingURL=lightbox.js.map
+
+//# sourceMappingURL=lightbox.js.map
+
+//# sourceMappingURL=lightbox.js.map
+
+//# sourceMappingURL=lightbox.js.map
+
+//# sourceMappingURL=lightbox.js.map
+
+//# sourceMappingURL=lightbox.js.map
+
+//# sourceMappingURL=lightbox.js.map
+
+//# sourceMappingURL=lightbox.js.map
+
+//# sourceMappingURL=lightbox.js.map
+
+//# sourceMappingURL=lightbox.js.map
+
+//# sourceMappingURL=lightbox.js.map
+
+//# sourceMappingURL=lightbox.js.map
+
+//# sourceMappingURL=lightbox.js.map
+
+//# sourceMappingURL=lightbox.js.map
+
+//# sourceMappingURL=lightbox.js.map
+
+//# sourceMappingURL=lightbox.js.map

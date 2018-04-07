@@ -1,0 +1,208 @@
+'use strict';
+
+
+define('widget-contacts-view',['_','jquery','logActions'],
+
+
+
+function(a,b,c)
+
+
+
+{
+return{
+
+open:function(){return function(e){
+var f=this;
+require(['promise!google-maps-api'],function(){
+f._open(e);
+});
+}}(),
+
+_open:function(){return function(e){
+
+var f=b('#'+e);
+
+f.find('.ul-w-contacts-map').each(function(){
+
+var g=b(this);
+
+
+c.add({
+fromFile:'widgets/contacts/js/view.js',
+title:'render google map',
+desc:'id: '+e});
+
+
+
+var h=new google.maps.Marker,
+i=new google.maps.Map(this),
+j=new google.maps.LatLng(
+g.data('latitude'),
+g.data('longitude')),
+
+
+k=parseInt(g.data('zoom'))||8;
+
+i.setOptions({
+scrollwheel:!1,
+disableDefaultUI:!0,
+center:j,
+zoom:k,
+mapTypeId:google.maps.MapTypeId.ROADMAP}),
+
+
+h.setOptions({
+map:i,
+position:j,
+draggable:!1});
+
+});
+}}()};
+
+});
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map

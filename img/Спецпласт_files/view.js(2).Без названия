@@ -1,0 +1,472 @@
+'use strict';define('widget-gallery-view',['jquery','owlEdit','lightbox','justifiedGallery'],function(a,b,c){return{name:'gallery-view',options:{},opened:!1,slidersOptions:{},init:function init(){var f=this;a('.ul-w-gallery-grid-wrap',f.$el).addClass('ul-loading-indicator'),a(document).on('click.gallery','.ul-w-gallery-item',function(){if(a(this).data('src')){var g=[],h=a(this).data('i')||0;a.each(a(this).closest('.ul-widget-gallery').find('.ul-w-gallery-item'),function(k){var l=a(this).closest('.ul-widget-gallery').find('.ul-w-gallery-item[data-i="'+k+'"]');g.push({src:l.data('src'),title:l.find('.caption').text()})});var j=a(this).closest('.ul-widget-gallery').attr('data-view');'slideshow'!=j&&c.show({slide:!0,start:h,srcList:g,title:a(this).data('title')==void 0?a(this).closest('.ul-w-gallery-item').data('title'):a(this).parent().find('.caption').text()})}else return!1}),a(window).on('colResized',function(){var g=[].slice.call(arguments,1);setTimeout(function(){a.each(g,function(h,j){var k=a(j).find('#ul-type-slider');k.length?f._responseCarousel(k):a(j).find('.ul-widget-gallery').length&&!a(j).find('#ul-type-slider').length&&f.resizeCols()})},500)}),a(window).on('resize.galleryGrid',f.resizeCols),f.resizeCols()},resizeCols:function resizeCols(){a('.ul-widget-gallery .ul-w-gallery-grid-wrap').each(function(){var f=a('.ul-w-gallery-item',a(this)),g=a.makeArray(f).reduce(function(h,j){return h+a(j).width()},0);g=Math.round(g/f.length),f.each(function(){a(this).height(g)})}),this.gridLoaded&&(this.gridLoaded=!1,this.$el&&this.$el.find('.ul-w-gallery-grid-wrap').length&&this.$el.find('.ul-w-gallery-grid-wrap').removeClass('ul-loading-indicator'))},_responseCarousel:function _responseCarousel(f){var g=f.closest('.ul-widget').attr('id');f==void 0?a('#ul-type-slider').each(function(){a(this).data('owlCarousel').reinit(),'previews'==this.slidersOptions[g].slideshow.controls||f.data('edit')||this.hidePreview(f)}):(f.data('owlCarousel').reinit(),'previews'!=this.slidersOptions[g].slideshow.controls&&!f.data('edit')&&this.hidePreview(f))},open:function open(f){var g=this,h={};if(g.$el=a('#'+f),0==g.$el.length)return void console.log('not exist widget with id: '+f);if(this.opened||(this.init(),this.opened=!0),!g.$el||0==g.$el.length)return void console.log('el not found');try{var j=JSON.parse(a('#'+f+'-options').attr('data-options'))}catch(o){return void console.log('Error on JSON.parse',o)}var k=g.$el.attr('data-view');if('slideshow'==k)h[f]=j,this.slidersOptions=a.extend(this.slidersOptions,h),this._setOwlCarousel(g.$el);else if('grid'==k)a('.ul-w-gallery-grid-wrap',g.$el).removeClass('ul-loading-indicator');else if('collage'!=k)console.log('error');else if('horizontal'==j.collage.orientation){var l='under'==j.collage.imgTitleEffect,m=g.$el.find('.ul-w-gallery-collage-wrap-horizontal'),n=function(o){return 1200<=o.width()?o.width()/7:992<=o.width()?o.width()/6:768<=o.width()?o.width()/5:o.width()/4};m.justifiedGallery({rowHeight:n(m),lastRow:'justify',margins:{x:10,y:'under'==l?40:10},sizeRangeSuffixes:{lt100:'',lt240:'',lt320:'',lt500:'',lt640:'',lt1024:''},captions:j.collage.imgTitleShow,captionSettings:{animationDuration:500,visibleOpacity:l?1:0.7,nonVisibleOpacity:l?1:0}}).on('jg.beforeResize',function(o,p){p.settings.rowHeight=n(p.$gallery)}).on('jg.complete',function(){m.find('.ul-w-gallery-item .caption').addClass('note')})}},_setOwlCarousel:function _setOwlCarousel(f){var g=this,h=f.attr('id'),j=this.slidersOptions[h],k=function(){var m=0;a('.owl-page',f).each(function(n,o){m+=a(o).outerWidth(!0)}),a('.owl-pagination',f).width(m),'previews'!=j.slideshow.controls||setTimeout(function(){a('.owl-wrapper-outer',f).children('.ul-nav-gallary-slider').css('display','none')},100)};f.children('#ul-type-slider').owlCarousel({items:j.slideshow.count,autoPlay:!!j.slideshow.autoplay&&1e3*j.slideshow.time,singleItem:!(1<j.slideshow.count),slideSpeed:500,responsive:!0,responsiveRefreshRate:100,mouseDrag:!1,navigation:!1,pagination:!1,rewindNav:j.slideshow.autoplay,scrollPerPage:!0,itemsScaleUp:!0,addClassActive:!0,transitionStyle:'slide'!=j.slideshow.animation&&j.slideshow.animation,afterMove:function afterMove(m){a('.ul-previer-slider',a('.owl-page',f)).css({opacity:0.5}),a('.owl-page',f).removeClass('active');var n=m.find('.owl-wrapper .active').index();a('.ul-owl-controls .owl-page',f).eq(n).addClass('active');var o=a('.control-panel .owl-pagination .active',g.$el);a('.ul-previer-slider',o).css({opacity:1})},afterUpdate:k,afterInit:function l(m){var n=this;a('.control-panel',f).show(),k(m,this);var o=1*a('#ul-type-slider',f).data('slidestart');f.data('edit')&&f.children('#ul-type-slider').trigger('owl.jumpTo',o),a('.owl-page',f).eq(o).addClass('active'),a('.gallery-slide-thumb-left',f).click(function(){var p=parseInt(a('.owl-pagination',f).css('margin-left'));a('.owl-pagination',f).animate({marginLeft:0>=p+a('.ul-owl-controls',f).width()?p+a('.ul-owl-controls',f).width():0},200)}),a('.gallery-slide-thumb-right',f).click(function(){var p=parseInt(a('.owl-pagination',f).css('margin-left')),q=a('.ul-owl-controls',f).width()+-1*p>=a('.owl-pagination',f).width()?p:-1*a('.ul-owl-controls',f).width()+p+168;a('.owl-pagination',f).animate({marginLeft:q},200)}),a('.ul-nav-gallary-slider',f).length||'arrows'!=j.slideshow.controls||(a('.owl-wrapper-outer',f).append('<a  class="prev-owl ul-nav-gallary-slider"/>'),a('.owl-wrapper-outer',f).append('<a  class="next-owl ul-nav-gallary-slider"/>')),a('.next-owl',f).click(function(){m.trigger('owl.next'),a('.owl-page',f).removeClass('active'),a('.owl-page',f).eq(n.owl.visibleItems[0]).addClass('active');var p=a('.owl-page',f).eq(n.owl.visibleItems[0]).position(),q=a('.owl-page',f).eq(n.owl.visibleItems[0]).width();p.left+q>a('.ul-owl-controls',f).width()&&a('.gallery-slide-thumb-right',f).trigger('click')}),a('.prev-owl',f).click(function(){m.trigger('owl.prev'),a('.owl-page',f).removeClass('active'),a('.owl-page',f).eq(n.owl.visibleItems[0]).addClass('active');var p=a('.owl-page',f).eq(n.owl.visibleItems[0]).position(),q=a('.owl-page',f).eq(n.owl.visibleItems[0]).width();0>p.left+q&&a('.gallery-slide-thumb-left',f).trigger('click')}),a('.owl-page',f).click(function(){a('.active',a(this).parent()).removeClass('active'),a(this).addClass('active'),f.children('#ul-type-slider').data('owlCarousel').goTo(a(this).index())}),'previews'==j.slideshow.controls||f.data('edit')||g.hidePreview(f),a.each(a('.ul-w-gallery-item',f),function(){a(this).hasClass('active')?a('.ul-previer-slider',a(this)).css({opacity:1}):a('.ul-previer-slider',a(this)).css({opacity:0.5})})}})},getGalleries:function getGalleries(){return a('.ul-widget-gallery.ul-widget-gallery-effect')},renderControls:function renderControls(){},hidePreview:function hidePreview(f){a('.control-panel',f).css('display','none')},setSlide:function setSlide(f,g){f.children('#ul-type-slider').data('owlCarousel').jumpTo(g)},autoScrollStop:function autoScrollStop(f){f.children('#ul-type-slider').data('owlCarousel').stop()},autoScrollStart:function autoScrollStart(f){f.children('#ul-type-slider').data('owlCarousel').play()},destroy:function destroy(f){var g=a('#'+f),h=g.attr('data-view');'slideshow'==h?(a('.ul-owl-controls .owl-pagination',g).hasClass('ui-sortable')&&a('.ul-owl-controls .owl-pagination',g).sortable('destroy'),a('.prev-owl',g).unbind('click'),a('.next-owl',g).unbind('click'),a('.gallery-slide-thumb-left',g).unbind('click'),a('.gallery-slide-thumb-right',g).unbind('click'),a('.owl-page',g).unbind('click'),a(window).off('resize.slider-1'),g.off('click.removeImg'),g.off('click.editImg')):'grid'==h?a(document).on('gallery'):'collage'==h?(a(document).on('gallery'),a(window).off('resize.gallery'),a(window).off('scroll.gallery')):console.log('error')}}});
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map
+
+//# sourceMappingURL=view.js.map

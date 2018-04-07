@@ -1,0 +1,286 @@
+@font-face {
+    font-family: "Gilroy";
+    src: url("../fonts/gilroy-extrabold.woff2") format("woff2");
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Gilroy";
+    src: url("../fonts/gilroy-light.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+
+    font-family: "Gilroy", Arial, sans-serif;
+    font-size: 18px;
+    line-height: 30px;
+    letter-spacing: 0.01em;
+    color: #000;
+
+
+    background-color: #000;
+    background-image: url("../img/background.jpg");
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-size: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    width: auto;
+}
+
+
+.visually-hidden:not(:focus):not(:active),
+input[type="checkbox"].visually-hidden,
+input[type="radio"].visually-hidden {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+
+    white-space: nowrap;
+
+    -webkit-clip-path: inset(100%);
+
+            clip-path: inset(100%);
+    clip: rect(0, 0, 0, 0);
+    overflow: hidden;
+}
+
+.container {
+    margin: 0 auto;
+    width: 1160px;
+    padding: 0;
+
+}
+
+.main-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    position: relative;
+    min-height: 150px;
+    background-color: rgba(245,198,39,0.9); /*#f5c627*/
+}
+
+.logo {
+    position:absolute;
+
+    width: 200px;
+    height: 79px;
+
+    left: 20px;
+    top: 30px;
+}
+
+.main-navigation {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.main-navigation ul {
+    margin: 0;
+    margin-top: 50px;
+    margin-left: 270px;
+    padding: 0;
+
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+
+    list-style: none;
+}
+
+.main-navigation_element {
+    display: inline-block;
+    margin-right: 60px;
+}
+
+.main-navigation_element:last-child {
+    margin-right: 0;
+}
+
+.main-navigation a {
+    color: inherit;
+}
+
+.content {
+    background-color: rgba(245,198,39,0.9); /*#f5c627*/
+}
+
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    padding: 10px 60px;
+}
+
+.features h2 {
+    margin:0;
+    padding: 0;
+    font-size: 30px;
+    line-height: 34px;
+    text-align: center;
+}
+
+.features-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 40px 0;
+    padding: 0;
+
+    width: 100%;
+
+    text-align: justify;
+
+    list-style: none;
+}
+
+.features-list li {
+    /* display: inline-block; */
+    position: relative;
+    margin-right: 40px;
+    padding: 10px;
+    padding-left: 40px;
+
+    color: rgba(245,198,39,0.9);
+
+    background-color: rgba(0,0,0,1);;
+
+    border-radius: 15px;
+}
+
+.features-list li:last-child {
+    margin-right: 0;
+}
+
+.features-list li::before {
+    content: "";
+
+    position: absolute;
+    display: block;
+
+    width: 30px;
+    height: 30px;
+
+    left: 5px;
+}
+
+.features-list li:first-child::before {
+    background-image: url("../img/hazard-sign-fire.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.features-list li:nth-child(2)::before {
+    background-image: url("../img/hazard-sign-toxic.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.features-list li:nth-child(3)::before {
+    background-image: url("../img/hazard-sign-flash.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.features-list li:last-child::before {
+    background-image: url("../img/hazard-sign-dust.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.features-promo {
+    margin: 0;
+    padding: 0;
+
+    width: 1060px;
+
+    text-indent: 40px;
+    text-align: justify;
+}
+
+.product-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-image {
+    margin: 0;
+    padding: 0;
+}
+
+.product-description-column {
+    padding: 40px;
+    padding-top: 0;
+
+    width: 100%;
+}
+
+.product-properties-controls {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    flex: 0 0 100px;
+    /* width: 100%; */
+
+
+    margin: auto;
+    padding: 0;
+
+    text-align: justify;
+
+    list-style: none;
+}
+
+.product-properties-controls li {
+    padding: 0;
+    margin: auto;
+    display: inline-block;
+    text-align: center;
+}
+
+.product-properties-controls label {
+    display: block;
+    padding: 10px 20px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.product-properties-controls input:checked+label {
+    background-color: #000;
+    color: rgba(245,198,39,0.9);
+}
+
+.product-properties-controls::after {
+    content: "";
+    position: absolute;
+    display: block;
+
+    width: 100%;
+    height: 2px;
+
+    bottom: -2px;
+    left: 0;
+
+    background-color: #000;
+}
+
+.product-properties-hidden {
+    display: none;
+}
