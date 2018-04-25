@@ -118,7 +118,8 @@ input[type="radio"].visually-hidden {
 }
 
 .content {
-    background-color: rgba(245,198,39,0.9); /*#f5c627*/
+  background-color: #ffffff; /*rgba(245,198,39,0.9); #f5c627*/
+
 }
 
 .features {
@@ -206,12 +207,11 @@ input[type="radio"].visually-hidden {
 }
 
 .features-promo {
-    margin: 0;
+    margin: 10px 0;
     padding: 0;
 
     width: 1060px;
 
-    text-indent: 40px;
     text-align: justify;
 }
 
@@ -318,4 +318,8 @@ input[type="radio"].visually-hidden {
     padding: 0;
     display: block;
     width: 100%;
+}
+
+.product-properties-item li {
+  margin: 10px 0;
 }
